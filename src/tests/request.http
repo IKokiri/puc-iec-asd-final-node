@@ -1,8 +1,13 @@
-GET http://localhost:4000/search/casa HTTP/1.1
+GET http://localhost:4000/search/escola HTTP/1.1
 content-type: application/json
 
 ###
-GET http://localhost:4000/magnet/http://megatorrentshd.net/casa-gucci-2021-hd-web-dl-720p-e-1080p-2160p-4k-dual-audio-5-1-dublado/1 HTTP/1.1
+POST http://localhost:4000/search/magnet HTTP/1.1
 content-type: application/json
 
+{
+    "title": "The Magicians Escola de Magia 3ª Temporada Completa Torrent Dublada e Legendada",
+    "link": "https://www.baixafilme.net/the-magicians-escola-de-magia-3a-temporada-completa-torrent-dublada-e-legendada-x01/",
+    "site_id": 2
+  }
 ###

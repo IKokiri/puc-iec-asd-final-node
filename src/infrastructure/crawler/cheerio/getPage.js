@@ -3,7 +3,6 @@ import got from "got";
 
 const getPage = async (dataToScrape) => {
 
-
     const { url, section, title: titleData, link: linkData } = dataToScrape
 
     const response = await got(url);
@@ -17,7 +16,7 @@ const getPage = async (dataToScrape) => {
         const title = $(element).find(titleData).text()
         const link = $(element).find(linkData).attr('href')
         
-        const movie = { title, link, source: dataToScrape.id }
+        const movie = { title, link, site_id: dataToScrape.id }
 
         searchPossibilities.push(movie)
     })
