@@ -1,8 +1,8 @@
-import { getMostAndVerified } from "../repository/moviesRepository.js"
+import { getMostRated } from "../repository/moviesRepository.js"
 
 const getVerified = async (term) => {
   
-  const verifieds = await getMostAndVerified()
+  const verifieds = await getMostRated()
   return verifieds
    
 }

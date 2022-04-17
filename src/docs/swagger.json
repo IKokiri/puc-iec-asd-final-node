@@ -1,0 +1,125 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Api para capturar dados de sites",
+        "description": "Essa API tem a função principal de capturar dados referentes a magnet links em sites de torrent",
+        "contact": {
+            "email": "luiz.mendes@outlook.com"
+        },
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:4000/",
+            "description": "dev api"
+        }
+    ],
+    "paths": {
+        "/search/magnet": {
+            "post": {
+                "summary": "Salva link retornando os magnets",
+                "description": "Responsável por fazer o cadastro dolink clicado retornando seus magnets",
+                "tags": [
+                    "Search"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Link"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Requisição com sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/search/{term}": {
+            "get": {
+                "summary": "Busca item",
+                "description": "Responsável de buscar o item requisitado",
+                "tags": [
+                    "Crawler"
+                ],
+                "parameters": [
+                    {
+                        "name": "term",
+                        "in": "path",
+                        "description": "Termo da busca",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "schema": {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "#/components/schemas/Link"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/verified": {
+            "get": {
+                "summary": "Busca links mais vistos e verificados",
+                "description": "Responsavel por buscar os links mais visitados com data deverificação de disponibilidade",
+                "tags": [
+                    "Verified"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "schema": {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "#/components/schemas/Link"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Links": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "number"
+                    },
+                    "link": {
+                        "type": "string"
+                    },
+                    "site_id": {
+                        "type": "number"
+                    },
+                    "title": {
+                        "type": "string"
+                    }
+                }
+            }
+        }
+    }
+}

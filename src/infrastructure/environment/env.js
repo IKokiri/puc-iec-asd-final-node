@@ -3,10 +3,16 @@ import dotenv from 'dotenv';
 const addEnvironmentVariables = () => {
 
   const environment = process.env.NODE_ENV
-  let envFile = (environment === 'prod') ? ".env.prod" : ".env.dev"
-  const config = { path: `./src/infrastructure/environment/${envFile}` }
 
-  dotenv.config(config);
+
+
+  if (environment === 'dev') {
+    const envFile = ".env.dev"
+    let path = { path: `./src/infrastructure/environment/${envFile}` }
+    const config = path 
+    dotenv.config(config);
+  }
+
 }
 
 export { addEnvironmentVariables }

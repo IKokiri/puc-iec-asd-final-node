@@ -37,9 +37,20 @@ const addRate = async (title) => {
     }
 }
 
-const getMostAndVerified = async (title) => {
+const setVerified = async (id) => {
     try {
-        const query = `select * from movies order by rate desc limit 10`
+        const query = `update movies set verified = datetime() where id = ?`
+        const movie = await getManager().query(query, [id])
+        return true
+    } catch (error) {
+        console.log(error)
+        return false
+    }
+}
+
+const getMostRated = async (title) => {
+    try {
+        const query = `select * from movies order by verified desc, rate desc limit 10`
         const movies = await getManager().query(query, [title])
         return movies
     } catch (error) {
@@ -48,4 +59,4 @@ const getMostAndVerified = async (title) => {
     }
 }
 
-export { saveMovie, isMovieTitleExists, addRate, getMostAndVerified }
+export { saveMovie, isMovieTitleExists, addRate, getMostRated, setVerified }
