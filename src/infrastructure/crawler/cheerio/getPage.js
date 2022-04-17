@@ -1,11 +1,17 @@
 import cheerio from "cheerio";
 import got from "got";
+import { v4 } from "uuid";
 
 const getPage = async (dataToScrape) => {
 
     const { url, section, title: titleData, link: linkData } = dataToScrape
-
-    const response = await got(url);
+    let response = ''
+    try{
+        response = await got(url);
+    }catch(e){
+        console.log('erro ao obter pagina')
+        return false
+    }
 
     const $ = cheerio.load(response.body);
 
@@ -15,8 +21,8 @@ const getPage = async (dataToScrape) => {
     $(section).each(function (index, element) {
         const title = $(element).find(titleData).text()
         const link = $(element).find(linkData).attr('href')
-        
-        const movie = { title, link, site_id: dataToScrape.id }
+        const id = v4()
+        const movie = { title, link, site_id: dataToScrape.id, id}
 
         searchPossibilities.push(movie)
     })

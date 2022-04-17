@@ -29,7 +29,8 @@
     "puppeteer-extra": "^3.2.3",
     "reflect-metadata": "^0.1.13",
     "sqlite3": "^5.0.3",
-    "typeorm": "^0.3.6"
+    "typeorm": "^0.3.6",
+    "uuid": "^8.3.2"
   },
   "devDependencies": {
     "@types/node": "^17.0.24",

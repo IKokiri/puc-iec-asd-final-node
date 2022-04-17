@@ -4,6 +4,7 @@ import indexRouter from './infrastructure/routes/index.js';
 import { addEnvironmentVariables } from './infrastructure/environment/env.js';
 import serachRouter from './infrastructure/routes/search.js';
 import connection from './infrastructure/database/connection.js';
+import verifiedRouter from './infrastructure/routes/verified.js';
 
 addEnvironmentVariables()
 await connection()
@@ -13,5 +14,6 @@ app.use(cors());
 
 app.use('/', indexRouter);
 app.use('/search/', serachRouter);
+app.use('/verified/', verifiedRouter);
 
 export default app;

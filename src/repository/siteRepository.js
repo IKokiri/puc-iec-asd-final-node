@@ -7,7 +7,6 @@ const getAllDataSite = async () => {
 
     const query = `SELECT * FROM site_data`
     const sitesData = getManager().query(query)
-    console.log(sitesData)
   } catch (error) {
     console.log(error)
     return false

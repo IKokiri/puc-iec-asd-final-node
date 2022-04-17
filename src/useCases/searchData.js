@@ -5,7 +5,10 @@ const searchData = async (term) => {
   
   const dataToScrape = await getOneRandomDataSite()
   dataToScrape.url += term
-  return getPage(dataToScrape)
+  const dataFound = await getPage(dataToScrape)
+
+  return (dataFound)? dataFound : false
+   
 
 }
 
