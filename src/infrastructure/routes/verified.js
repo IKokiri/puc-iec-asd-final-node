@@ -8,8 +8,12 @@ const verifiedRouter = Router();
 
 
 verifiedRouter.get('/', async (req, res) => {
-  const foundVerifieds = await getVerified()
-  res.status(200).send(foundVerifieds);
+  try {
+    const foundVerifieds = await getVerified()
+    return (foundVerifieds.length)? res.status(200).send(foundVerifieds) : res.status(204)
+  } catch (error) {
+    return res.status(500).send({status: false, msg: "Server Error, tente novamente"});
+  }
 });
 
 

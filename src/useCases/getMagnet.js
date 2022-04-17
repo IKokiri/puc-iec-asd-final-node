@@ -4,19 +4,23 @@ import { getOneDataSite } from "../repository/siteRepository.js"
 
 const getMagnet = async (dataToGetMagnet) => {
   const { site_id, title } = dataToGetMagnet
+  try {
 
-  const movieExists = await isMovieTitleExists(title)
+    const movieExists = await isMovieTitleExists(title)
 
-  if(!movieExists) {
-    await saveMovie(dataToGetMagnet)
-  }else{
-    await addRate(title)
+    if (!movieExists) {
+      await saveMovie(dataToGetMagnet)
+    } else {
+      await addRate(title)
+    }
+
+    const dataSite = await getOneDataSite(site_id)
+    const siteInfo = await getPageMagnet(dataToGetMagnet, dataSite)
+
+    return siteInfo
+  } catch (error) {
+    return false
   }
-  
-  const dataSite = await getOneDataSite(site_id)
-  const siteInfo = await getPageMagnet(dataToGetMagnet, dataSite)
-  
-  return siteInfo
 }
 
 export default getMagnet

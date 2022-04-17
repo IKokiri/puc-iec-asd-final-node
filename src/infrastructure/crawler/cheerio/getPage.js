@@ -13,20 +13,25 @@ const getPage = async (dataToScrape) => {
         return false
     }
 
-    const $ = cheerio.load(response.body);
+    try {
+        const $ = cheerio.load(response.body);
 
-    let searchPossibilities = []
-
-
-    $(section).each(function (index, element) {
-        const title = $(element).find(titleData).text()
-        const link = $(element).find(linkData).attr('href')
-        const id = v4()
-        const movie = { title, link, site_id: dataToScrape.id, id}
-
-        searchPossibilities.push(movie)
-    })
-    return searchPossibilities
+        let searchPossibilities = []
+    
+        $(section).each(function (index, element) {
+            const title = $(element).find(titleData).text()
+            const link = $(element).find(linkData).attr('href')
+            const id = v4()
+            const movie = { title, link, site_id: dataToScrape.id, id}
+    
+            searchPossibilities.push(movie)
+        })
+        return searchPossibilities
+    } catch (error) {
+        return false
+    }
+    
+    return false
 
 }
 

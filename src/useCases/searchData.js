@@ -3,11 +3,15 @@ import { getOneRandomDataSite } from "../repository/siteRepository.js"
 
 const searchData = async (term) => {
   
-  const dataToScrape = await getOneRandomDataSite()
-  dataToScrape.url += term
-  const dataFound = await getPage(dataToScrape)
+  try {
+    const dataToScrape = await getOneRandomDataSite()
+    dataToScrape.url += term
+    const dataFound = await getPage(dataToScrape)
 
-  return (dataFound)? dataFound : false
+    return (dataFound)? dataFound : false 
+  } catch (error) {
+    return false 
+  }
    
 
 }

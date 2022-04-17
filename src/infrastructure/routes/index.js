@@ -4,7 +4,7 @@ const indexRouter = Router();
 
 try {
   indexRouter.get('/', (req, res) => {
-    const info = { status: 'ok' }
+    const info = { status: 'v1.0.0' }
 
     res.status(200).send({ info });
   });
